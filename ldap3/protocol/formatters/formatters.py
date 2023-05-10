@@ -119,6 +119,9 @@ def format_ad_timestamp(raw_value):
                                       tz=utc_timezone)  # forces true division in python 2
     except (OSError, OverflowError, ValueError):  # on Windows backwards timestamps are not allowed
         try:
+            if len(str(timestamp)) > 17:
+                timestamp = f'{timestamp}'[:17]
+                timestamp = int(timestamp)
             unix_epoch = datetime.fromtimestamp(0, tz=utc_timezone)
             diff_seconds = timedelta(seconds=timestamp / 10000000.0 - 11644473600)
             return unix_epoch + diff_seconds
