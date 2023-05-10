@@ -119,6 +119,8 @@ def format_ad_timestamp(raw_value):
                                       tz=utc_timezone)  # forces true division in python 2
     except (OSError, OverflowError, ValueError):  # on Windows backwards timestamps are not allowed
         try:
+            # The timestamp that is retunred from AD might be too big and this can cause this function
+            # to fail, so we are trimming any number after 17 characters
             if len(str(timestamp)) > 17:
                 timestamp = f'{timestamp}'[:17]
                 timestamp = int(timestamp)
