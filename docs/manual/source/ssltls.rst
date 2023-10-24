@@ -82,11 +82,11 @@ server trust the credential provided when establishing the secure channel::
 Digest-MD5
 ^^^^^^^^^^
 
-To use the DIGEST-MD5 you must pass a 4-value tuple as sasl_credentials: (realm, user, password, authz_id). You can pass None for 'realm' and 'authz_id' if not used. Quality of Protection is always 'auth'::
+To use the DIGEST-MD5 you must pass a 4-value or 5-value tuple as sasl_credentials: (realm, user, password, authz_id, enable_signing). You can pass None for 'realm', 'authz_id' and 'enable_signing' if not used::
 
      server = Server(host = test_server, port = test_port)
      connection = Connection(server, auto_bind = True, version = 3, client_strategy = test_strategy, authentication = SASL,
-                             sasl_mechanism = 'DIGEST-MD5', sasl_credentials = (None, 'username', 'password', None))
+                             sasl_mechanism = 'DIGEST-MD5', sasl_credentials = (None, 'username', 'password', None, 'sign'))
 
 Username is not required to be an LDAP entry, but it can be any identifier recognized by the server (i.e. email, principal, ...). If
 you pass None as 'realm' the default realm of the LDAP server will be used.

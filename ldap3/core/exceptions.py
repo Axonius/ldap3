@@ -393,6 +393,9 @@ class LDAPInvalidTlsSpecificationError(LDAPExceptionError):
 class LDAPInvalidHashAlgorithmError(LDAPExceptionError, ValueError):
     pass
 
+class LDAPSignatureVerificationFailedError(LDAPExceptionError):
+    pass
+
 
 # connection exceptions
 class LDAPBindError(LDAPExceptionError):

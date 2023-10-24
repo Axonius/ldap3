@@ -273,6 +273,9 @@ class Connection(object):
             self.use_referral_cache = use_referral_cache
             self.auto_escape = auto_escape
             self.auto_encode = auto_encode
+            self._digestMD5_Kic = None
+            self._digestMD5_Kis = None
+            self._digestMD5_secnum = 0
 
             if isinstance(server, STRING_TYPES):
                 server = Server(server)
