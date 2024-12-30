@@ -835,6 +835,12 @@ class MockBaseStrategy(object):
             for candidate in candidates:
                 if attr_name in self.connection.server.dit[candidate]:
                     for value in self.connection.server.dit[candidate][attr_name]:
+                        if isinstance(value, bytes):
+                            if re.match(substring_filter.encode('ascii'), value, flags=re.IGNORECASE):
+                                node.matched.add(candidate)
+                            else:
+                                node.unmatched.add(candidate)
+                            continue
                         if regex_filter.match(to_unicode(value, SERVER_ENCODING)):
                             node.matched.add(candidate)
                         else:
